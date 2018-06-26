@@ -1,6 +1,6 @@
 import QueueGroup from './src/QueueGroup.js'
 
-const queueGroupSize = 6
+const queueGroupSize = 3
 const fetchTask = url => fetch(url)
 
 /* const getId = () => new Date().getTime() + parseInt(Math.random() * 10000)
@@ -15,7 +15,10 @@ const taskHooks = {
   },
   beforeEnd(ctx) {
     ctx.newId = getId()
-  } 
+  },
+  onError(ctx) {
+    ctx.newId = getId()
+  }
 } */
 
 const queueGroup = new QueueGroup(queueGroupSize)
