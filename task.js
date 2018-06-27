@@ -1,17 +1,17 @@
 import QueueGroup from './src/QueueGroup.js'
 
-const queueGroupSize = 3
-const fetchTask = url => fetch(url)
+const queueGroupSize = 4
+const fetchTask = params => fetch(...params)
 
-/* const getId = () => new Date().getTime() + parseInt(Math.random() * 10000)
+/* const getId = () => 'a' + new Date().getTime() + parseInt(Math.random() * 10000)
 const idArray = []
 for (let i = 0; i < queueGroupSize; i++)
   idArray.push(getId())
 
 const queueGroup = new QueueGroup(queueGroupSize, idArray)
 const taskHooks = {
-   beforeStart(ctx) {
-    ctx.params = ctx.params + `?id=${ctx.id}`
+  beforeStart(ctx) {
+    ctx.params[0] = ctx.params[0] + `?id=${ctx.id}`
   },
   beforeEnd(ctx) {
     ctx.newId = getId()
@@ -23,7 +23,7 @@ const taskHooks = {
 
 const queueGroup = new QueueGroup(queueGroupSize)
 const taskHooks = {
-  /* beforeStart(ctx) {
+ /*  beforeStart(ctx) {
     console.log(`${ctx.id}任务开始`)
   },
   beforeEnd(ctx) {
@@ -34,6 +34,6 @@ const taskHooks = {
   } */
 }
 
-export default function (url, task = fetchTask) {
-  return queueGroup.addTask(task, url, taskHooks)
+export default function () {
+  return queueGroup.addTask(fetchTask, arguments, taskHooks)
 }
